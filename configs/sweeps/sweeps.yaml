@@ -1,0 +1,26 @@
+# @package _global_
+defaults:
+  - override /hydra/sweeper: optuna
+  - override /hydra/sweeper/sampler: tpe
+
+hydra:
+  sweeper:
+    direction: maximize
+    study_name: mlp_mixer_study
+    storage: sqlite:///mlp_mixer_study.db
+    n_trials: 20
+    n_jobs: 1
+    params:
+      model.config.hidden_dim: choice(256, 512, 768, 1024)
+      model.config.token_mlp_dim: choice(128, 256, 384, 512)
+      model.config.channel_mlp_dim: choice(2048, 3072, 4096)
+      model.config.patch_size: choice(2, 4, 8, 12, 16)
+
+      model.config.token_bias: choice(True, False)
+      model.config.channel_bias: choice(True, False)
+
+      # Log sampling for learning rate/weight decay)
+      training.config.optimizer.lr: tag(log, interval(1e-5, 1e-2))
+      training.config.optimizer.weight_decay: tag(log, interval(1e-4, 1e-1))
+      
+      batch_size: choice(8, 16, 32, 64)

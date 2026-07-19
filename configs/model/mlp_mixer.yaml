@@ -1,0 +1,16 @@
+_target_: src.adapters.model_adapter.MLPMixerModel
+config:
+  n_classes: 100
+  input_size: 3
+  input_H: 32
+  input_W: 32
+  patch_size: 8
+  NormType: 'Layer'
+  hidden_dim: 64
+  token_mlp_dim: 128
+  token_bias: True
+  channel_mlp_dim: 128
+  channel_bias: True
+  num_blocks: 4
+  conv_bias: True
+  projector_bias: False

@@ -1,0 +1,9 @@
+defaults:
+  - model: mlp_mixer
+  - training: default
+  - optional sweeps: null
+  - _self_
+
+seed: 42
+epochs: 5
+batch_size: 32
